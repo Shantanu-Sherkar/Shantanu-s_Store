@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shantanu's Store — Affordable Vegan India</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F2E8;
+    --forest: #1C3A2B;
+    --sage: #5B7C6A;
+    --mint: #A8C5B5;
+    --gold: #D4A843;
+    --rust: #C05F3C;
+    --bark: #2E1F0F;
+    --white: #FDFCFA;
+    --text: #1A1410;
+    --muted: #7A6E62;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    background: var(--forest);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+    border-bottom: 2px solid var(--gold);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: 1.4rem;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: var(--mint); text-decoration: none;
+    font-size: 0.85rem; font-weight: 500;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-actions { display: flex; align-items: center; gap: 16px; }
+  .cart-btn {
+    background: var(--gold); color: var(--bark);
+    border: none; border-radius: 4px;
+    padding: 8px 20px; font-weight: 700;
+    font-size: 0.85rem; cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    transition: background 0.2s;
+  }
+  .cart-btn:hover { background: #e8bc55; }
+  .cart-count {
+    background: var(--rust); color: #fff;
+    border-radius: 50%; width: 20px; height: 20px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 700;
+    margin-left: -6px; vertical-align: top;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    background: var(--forest);
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 100px 60px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(168,197,181,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-bg-text {
+    position: absolute; right: -20px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 22vw; font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    line-height: 1; pointer-events: none;
+    user-select: none;
+  }
+  .hero-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem; color: var(--gold);
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 5.5rem);
+    font-weight: 900; line-height: 1.05;
+    color: var(--cream); margin-bottom: 24px;
+  }
+  .hero-title em { color: var(--gold); font-style: italic; }
+  .hero-subtitle {
+    font-size: 1.1rem; line-height: 1.7;
+    color: var(--mint); max-width: 480px;
+    margin-bottom: 40px;
+  }
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--bark);
+    padding: 14px 32px; border-radius: 4px;
+    font-weight: 700; font-size: 0.95rem;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #e8bc55; transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--cream);
+    padding: 14px 32px; border-radius: 4px;
+    font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; border: 2px solid rgba(255,255,255,0.25);
+    cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 56px;
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 2rem; font-weight: 700;
+    color: var(--gold); display: block;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--mint); margin-top: 2px; }
+  .hero-right {
+    display: flex; flex-direction: column;
+    gap: 16px; padding-left: 40px; position: relative; z-index: 2;
+  }
+  .hero-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(168,197,181,0.2);
+    border-radius: 12px; padding: 20px 24px;
+    backdrop-filter: blur(4px);
+    transition: transform 0.2s;
+  }
+  .hero-card:hover { transform: translateX(6px); }
+  .hero-card-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; color: var(--gold);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .hero-card-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); font-weight: 700; }
+  .hero-card-sub { font-size: 0.82rem; color: var(--mint); margin-top: 4px; }
+  .price-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--gold); margin-top: 8px;
+  }
+  .price-tag s { color: var(--muted); font-size: 0.85rem; margin-right: 8px; }
+
+  /* ─── SECTION WRAPPER ─── */
+  .section { padding: 90px 60px; }
+  .section-alt { background: var(--white); }
+  .section-dark { background: var(--forest); }
+  .section-header { margin-bottom: 56px; }
+  .section-kicker {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem; color: var(--rust);
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 900; line-height: 1.1;
+    color: var(--forest);
+  }
+  .section-dark .section-title { color: var(--cream); }
+  .section-title em { color: var(--gold); font-style: italic; }
+  .section-sub {
+    font-size: 1rem; color: var(--muted);
+    margin-top: 12px; max-width: 560px; line-height: 1.7;
+  }
+  .section-dark .section-sub { color: var(--mint); }
+
+  /* ─── SHOP ─── */
+  .category-pills {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px;
+  }
+  .pill {
+    padding: 8px 20px; border-radius: 100px;
+    border: 1.5px solid var(--sage);
+    background: transparent; color: var(--sage);
+    font-size: 0.82rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .pill:hover, .pill.active {
+    background: var(--forest); color: var(--cream);
+    border-color: var(--forest);
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .product-card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+  }
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(28,58,43,0.12);
+  }
+  .product-img {
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4.5rem;
+    position: relative;
+  }
+  .badge-vegan {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--forest); color: var(--mint);
+    font-size: 0.62rem; font-weight: 700;
+    padding: 4px 10px; border-radius: 100px;
+    letter-spacing: 1px; text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+  }
+  .badge-sale {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--rust); color: #fff;
+    font-size: 0.62rem; font-weight: 700;
+    padding: 4px 10px; border-radius: 100px;
+    font-family: 'Space Mono', monospace;
+  }
+  .product-info { padding: 20px; }
+  .product-brand {
+    font-size: 0.7rem; font-weight: 700;
+    color: var(--sage); text-transform: uppercase;
+    letter-spacing: 1.5px; margin-bottom: 4px;
+  }
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--text); margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .product-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; margin-bottom: 14px; }
+  .product-footer { display: flex; align-items: center; justify-content: space-between; }
+  .product-price { font-family: 'Space Mono', monospace; }
+  .product-price .now { font-size: 1.15rem; font-weight: 700; color: var(--forest); }
+  .product-price .was { font-size: 0.8rem; color: var(--muted); text-decoration: line-through; margin-right: 4px; }
+  .add-btn {
+    background: var(--forest); color: var(--cream);
+    border: none; border-radius: 6px;
+    padding: 8px 16px; font-size: 0.8rem;
+    font-weight: 600; cursor: pointer;
+    transition: background 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .add-btn:hover { background: var(--sage); }
+
+  /* ─── DAIRY ALTERNATIVES ─── */
+  .alt-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .alt-card {
+    border: 1.5px solid var(--mint);
+    border-radius: 12px; padding: 24px;
+    background: var(--white);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .alt-card:hover { border-color: var(--forest); transform: translateY(-3px); }
+  .dairy-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem; color: var(--rust);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .alt-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--forest); margin-bottom: 12px;
+  }
+  .alt-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .alt-tag {
+    background: var(--cream); color: var(--forest);
+    padding: 4px 12px; border-radius: 100px;
+    font-size: 0.78rem; font-weight: 500;
+    border: 1px solid rgba(28,58,43,0.15);
+  }
+  .cost-compare {
+    background: var(--cream);
+    border-radius: 8px; padding: 10px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem; color: var(--bark);
+    margin-top: 8px;
+  }
+  .cost-compare .save { color: var(--sage); font-weight: 700; }
+
+  /* ─── ALTERNATIVE FINDER ─── */
+  .finder-wrap {
+    background: var(--forest);
+    border-radius: 16px; padding: 48px;
+    max-width: 700px; margin: 0 auto; text-align: center;
+  }
+  .finder-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900;
+    color: var(--cream); margin-bottom: 8px;
+  }
+  .finder-sub { color: var(--mint); margin-bottom: 28px; font-size: 0.95rem; }
+  .finder-form { display: flex; gap: 12px; max-width: 440px; margin: 0 auto; }
+  .finder-input {
+    flex: 1; padding: 14px 20px;
+    border-radius: 6px; border: 2px solid rgba(168,197,181,0.3);
+    background: rgba(255,255,255,0.08); color: var(--cream);
+    font-size: 1rem; font-family: 'DM Sans', sans-serif;
+    outline: none; transition: border-color 0.2s;
+  }
+  .finder-input::placeholder { color: rgba(168,197,181,0.5); }
+  .finder-input:focus { border-color: var(--gold); }
+  .finder-btn {
+    background: var(--gold); color: var(--bark);
+    border: none; border-radius: 6px;
+    padding: 14px 24px; font-weight: 700;
+    font-size: 0.9rem; cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    transition: background 0.2s;
+  }
+  .finder-btn:hover { background: #e8bc55; }
+  .finder-results {
+    margin-top: 28px; display: none;
+    flex-wrap: wrap; gap: 10px; justify-content: center;
+  }
+  .finder-result-tag {
+    background: rgba(255,255,255,0.1);
+    color: var(--cream); padding: 10px 20px;
+    border-radius: 100px; font-size: 0.9rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    animation: fadeUp 0.3s ease both;
+  }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ─── IMPACT CALCULATOR ─── */
+  .calc-wrap {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: center;
+  }
+  .calc-left {}
+  .slider-group { margin-bottom: 28px; }
+  .slider-label {
+    display: flex; justify-content: space-between;
+    font-size: 0.88rem; font-weight: 600;
+    color: var(--forest); margin-bottom: 8px;
+  }
+  .slider-val { font-family: 'Space Mono', monospace; color: var(--sage); }
+  input[type=range] {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 4px;
+    background: var(--mint); border-radius: 2px; outline: none;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px; height: 20px;
+    border-radius: 50%; background: var(--forest);
+    cursor: pointer; border: 3px solid var(--gold);
+  }
+  .impact-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .impact-stat {
+    background: var(--forest); color: var(--cream);
+    border-radius: 12px; padding: 24px 20px;
+    text-align: center;
+  }
+  .impact-icon { font-size: 2.2rem; margin-bottom: 8px; }
+  .impact-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--gold);
+  }
+  .impact-label { font-size: 0.78rem; color: var(--mint); margin-top: 4px; }
+
+  /* ─── EDUCATION ─── */
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+  .edu-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(168,197,181,0.15);
+    border-radius: 12px; padding: 28px;
+    transition: background 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .edu-card:hover { background: rgba(255,255,255,0.09); transform: translateY(-3px); }
+  .edu-icon { font-size: 2.5rem; margin-bottom: 14px; }
+  .edu-cat {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; color: var(--gold);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .edu-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--cream); margin-bottom: 10px; }
+  .edu-body { font-size: 0.85rem; color: var(--mint); line-height: 1.65; }
+  .edu-link { color: var(--gold); font-size: 0.82rem; font-weight: 600; margin-top: 14px; display: block; text-decoration: none; }
+  .edu-link:hover { text-decoration: underline; }
+
+  /* ─── RECIPES ─── */
+  .recipes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .recipe-card {
+    background: var(--white); border-radius: 12px;
+    padding: 24px; border: 1px solid rgba(0,0,0,0.07);
+    transition: transform 0.2s;
+  }
+  .recipe-card:hover { transform: translateY(-4px); }
+  .recipe-emoji { font-size: 3rem; margin-bottom: 12px; }
+  .recipe-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--forest); margin-bottom: 6px; }
+  .recipe-meta { display: flex; gap: 12px; font-size: 0.78rem; color: var(--muted); margin-bottom: 12px; }
+  .recipe-meta span::before { content: '• '; color: var(--sage); }
+  .recipe-meta span:first-child::before { content: ''; }
+  .recipe-cost { font-family: 'Space Mono', monospace; color: var(--sage); font-size: 0.88rem; font-weight: 700; }
+  .recipe-steps { margin-top: 14px; font-size: 0.83rem; color: var(--muted); line-height: 1.65; }
+  .recipe-toggle {
+    background: none; border: none; color: var(--sage);
+    font-size: 0.82rem; font-weight: 600; cursor: pointer;
+    padding: 0; margin-top: 10px; font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ─── BRANDS ─── */
+  .brands-strip {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;
+  }
+  .brand-card {
+    border: 1.5px solid rgba(28,58,43,0.15);
+    border-radius: 10px; padding: 24px;
+    text-align: center; transition: all 0.2s;
+    cursor: pointer;
+  }
+  .brand-card:hover { border-color: var(--forest); background: var(--forest); }
+  .brand-card:hover .brand-name { color: var(--cream); }
+  .brand-card:hover .brand-type { color: var(--mint); }
+  .brand-logo { font-size: 2.2rem; margin-bottom: 10px; }
+  .brand-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--forest); }
+  .brand-type { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+
+  /* ─── SUBSCRIPTION ─── */
+  .sub-box {
+    background: var(--gold);
+    border-radius: 20px; padding: 56px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 32px;
+  }
+  .sub-left { max-width: 500px; }
+  .sub-kicker { font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--bark); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; opacity: 0.7; }
+  .sub-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: var(--bark); margin-bottom: 14px; line-height: 1.1; }
+  .sub-items { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .sub-item { background: rgba(0,0,0,0.1); color: var(--bark); padding: 6px 14px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; }
+  .sub-price { font-family: 'Space Mono', monospace; font-size: 2.5rem; font-weight: 700; color: var(--bark); }
+  .sub-price span { font-size: 1rem; opacity: 0.7; }
+  .sub-btn {
+    background: var(--forest); color: var(--cream);
+    border: none; border-radius: 8px;
+    padding: 18px 36px; font-size: 1rem;
+    font-weight: 700; cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .sub-btn:hover { background: var(--bark); transform: scale(1.03); }
+
+  /* ─── BEGINNER GUIDE ─── */
+  .guide-steps { display: flex; flex-direction: column; gap: 0; }
+  .guide-step {
+    display: grid; grid-template-columns: 80px 1fr;
+    gap: 24px; align-items: start;
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(28,58,43,0.1);
+  }
+  .guide-step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem; font-weight: 900;
+    color: var(--mint); line-height: 1;
+  }
+  .step-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--forest); margin-bottom: 8px; }
+  .step-body { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+  /* ─── RESEARCH ─── */
+  .research-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  .research-card {
+    background: var(--white); border-radius: 12px;
+    padding: 28px; border-left: 4px solid var(--sage);
+    transition: border-color 0.2s;
+  }
+  .research-card:hover { border-left-color: var(--gold); }
+  .research-tag { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--sage); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .research-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--forest); margin-bottom: 8px; line-height: 1.35; }
+  .research-body { font-size: 0.83rem; color: var(--muted); line-height: 1.65; }
+  .research-source { font-size: 0.72rem; color: var(--sage); margin-top: 14px; font-style: italic; }
+
+  /* ─── COMMUNITY ─── */
+  .community-posts { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .community-post {
+    background: var(--white); border-radius: 12px;
+    padding: 24px; border: 1px solid rgba(0,0,0,0.07);
+  }
+  .post-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .post-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--forest); display: flex;
+    align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .post-meta {}
+  .post-author { font-weight: 600; font-size: 0.88rem; color: var(--forest); }
+  .post-date { font-size: 0.72rem; color: var(--muted); }
+  .post-body { font-size: 0.85rem; color: var(--text); line-height: 1.65; margin-bottom: 14px; }
+  .post-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .post-tag { background: var(--cream); color: var(--sage); padding: 3px 10px; border-radius: 100px; font-size: 0.72rem; font-weight: 600; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--bark); color: var(--cream);
+    padding: 60px 60px 32px;
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand { }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--cream); margin-bottom: 12px; }
+  .footer-logo span { color: var(--gold); }
+  .footer-tagline { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 280px; }
+  .footer-col-title { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+  .payment-icons { display: flex; gap: 8px; }
+  .pay-badge {
+    background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6);
+    padding: 4px 10px; border-radius: 4px; font-size: 0.68rem;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* ─── CART SIDEBAR ─── */
+  .cart-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    z-index: 2000; display: none; align-items: flex-start; justify-content: flex-end;
+  }
+  .cart-overlay.open { display: flex; }
+  .cart-panel {
+    background: var(--white); width: 380px; height: 100vh;
+    overflow-y: auto; padding: 32px;
+    animation: slideIn 0.3s ease;
+  }
+  @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+  .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+  .cart-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--forest); }
+  .cart-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--muted); }
+  .cart-item { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.07); align-items: center; }
+  .cart-item-emoji { font-size: 2.2rem; }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+  .cart-item-price { font-family: 'Space Mono', monospace; color: var(--forest); font-size: 0.85rem; margin-top: 2px; }
+  .cart-item-remove { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.1rem; }
+  .cart-total { margin-top: 20px; font-family: 'Space Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--forest); text-align: right; }
+  .checkout-btn {
+    width: 100%; background: var(--forest); color: var(--cream);
+    border: none; border-radius: 8px; padding: 16px;
+    font-size: 1rem; font-weight: 700; cursor: pointer;
+    margin-top: 20px; font-family: 'Space Mono', monospace;
+    transition: background 0.2s;
+  }
+  .checkout-btn:hover { background: var(--sage); }
+  .empty-cart { text-align: center; padding: 48px 0; color: var(--muted); }
+  .empty-cart-icon { font-size: 3rem; margin-bottom: 14px; }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--forest); color: var(--cream);
+    padding: 12px 28px; border-radius: 100px;
+    font-size: 0.88rem; font-weight: 600;
+    z-index: 3000; transition: transform 0.3s ease;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+    .hero-right { padding-left: 0; }
+    .section { padding: 64px 24px; }
+    .calc-wrap { grid-template-columns: 1fr; }
+    .sub-box { flex-direction: column; padding: 36px 28px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .cart-panel { width: 100vw; }
+    .hero-bg-text { display: none; }
+  }
+
+  /* ─── SCROLL ANIMATIONS ─── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Shantanu's <span>Store</span></div>
+  <ul class="nav-links">
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#alternatives">Alternatives</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#recipes">Recipes</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#guide">Guide</a></li>
+    <li><a href="#community">Community</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cartCount">0</span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">🌱</div>
+  <div style="position:relative;z-index:2;">
+    <div class="hero-label">🌿 India's Vegan Marketplace</div>
+    <h1 class="hero-title">
+      Go Vegan.<br>
+      Stay <em>Affordable.</em><br>
+      Live Better.
+    </h1>
+    <p class="hero-subtitle">
+      Discover affordable plant-based products made for India — shop vegan alternatives, learn the truth about dairy, and start your journey today.
+    </p>
+    <div class="hero-ctas">
+      <a href="#shop" class="btn-primary">Shop Now →</a>
+      <a href="#guide" class="btn-outline">Beginner Guide</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">500+</span>
+        <div class="stat-label">Vegan Products</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">₹99</span>
+        <div class="stat-label">Starting Price</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">40+</span>
+        <div class="stat-label">Indian Brands</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hero-card-label">🔥 Best Seller</div>
+      <div class="hero-card-title">Goodmylk Oat Milk — 1L</div>
+      <div class="hero-card-sub">Creamy, barista-grade, perfect for chai</div>
+      <div class="price-tag"><s>₹220</s> ₹175</div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-label">💚 New Arrival</div>
+      <div class="hero-card-title">Blue Tribe Chicken Strips</div>
+      <div class="hero-card-sub">Plant-based, high protein, 100% vegan</div>
+      <div class="price-tag"><s>₹350</s> ₹290</div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-label">⭐ Staff Pick</div>
+      <div class="hero-card-title">Urban Platter Cashew Cheese</div>
+      <div class="hero-card-sub">Rich, spreadable, zero dairy</div>
+      <div class="price-tag"><s>₹420</s> ₹340</div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section id="shop" class="section section-alt">
+  <div class="section-header reveal">
+    <div class="section-kicker">🛍️ Our Store</div>
+    <h2 class="section-title">Shop <em>Vegan</em> Products</h2>
+    <p class="section-sub">Curated plant-based products — affordable, certified, and delivered across India.</p>
+  </div>
+  <div class="category-pills reveal" id="categoryPills"></div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- DAIRY ALTERNATIVES -->
+<section id="alternatives" class="section">
+  <div class="section-header reveal">
+    <div class="section-kicker">🥛 Go Dairy-Free</div>
+    <h2 class="section-title">Indian <em>Dairy</em> Alternatives</h2>
+    <p class="section-sub">Every dairy product you love — reimagined with plants. Cheaper, kinder, and often tastier.</p>
+  </div>
+  <div class="alt-grid" id="altGrid"></div>
+</section>
+
+<!-- ALTERNATIVE FINDER -->
+<section class="section section-alt">
+  <div class="finder-wrap reveal">
+    <h3 class="finder-title">Find Your Alternative 🔍</h3>
+    <p class="finder-sub">Type a dairy product — we'll find the best plant-based swap for you.</p>
+    <div class="finder-form">
+      <input class="finder-input" id="finderInput" placeholder="e.g. Paneer, Butter, Milk..." type="text" onkeydown="if(event.key==='Enter')findAlternative()">
+      <button class="finder-btn" onclick="findAlternative()">Find →</button>
+    </div>
+    <div class="finder-results" id="finderResults"></div>
+  </div>
+</section>
+
+<!-- IMPACT CALCULATOR -->
+<section id="impact" class="section">
+  <div class="section-header reveal">
+    <div class="section-kicker">🌍 Your Impact</div>
+    <h2 class="section-title">Calculate Your <em>Impact</em></h2>
+    <p class="section-sub">See the positive change you make by choosing plant-based every day.</p>
+  </div>
+  <div class="calc-wrap reveal">
+    <div class="calc-left">
+      <div class="slider-group">
+        <div class="slider-label"><span>Days on plant-based diet</span><span class="slider-val" id="daysVal">30 days</span></div>
+        <input type="range" min="1" max="365" value="30" id="daysSlider" oninput="calcImpact()">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label"><span>Meals per day (plant-based)</span><span class="slider-val" id="mealsVal">2 meals</span></div>
+        <input type="range" min="1" max="4" value="2" id="mealsSlider" oninput="calcImpact()">
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-top:8px;">Based on Oxford University research on food's environmental footprint. Every meal makes a difference! 🌿</p>
+    </div>
+    <div class="impact-stats">
+      <div class="impact-stat">
+        <div class="impact-icon">💧</div>
+        <div class="impact-val" id="waterSaved">720L</div>
+        <div class="impact-label">Water Saved</div>
+      </div>
+      <div class="impact-stat">
+        <div class="impact-icon">🏭</div>
+        <div class="impact-val" id="co2Saved">12kg</div>
+        <div class="impact-label">CO₂ Avoided</div>
+      </div>
+      <div class="impact-stat">
+        <div class="impact-icon">🐄</div>
+        <div class="impact-val" id="animalsSaved">3</div>
+        <div class="impact-label">Animals Spared</div>
+      </div>
+      <div class="impact-stat">
+        <div class="impact-icon">🌾</div>
+        <div class="impact-val" id="landSaved">4m²</div>
+        <div class="impact-label">Land Protected</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="section section-dark">
+  <div class="section-header reveal">
+    <div class="section-kicker">📚 The Truth</div>
+    <h2 class="section-title">Reality of the <em>Dairy</em> Industry</h2>
+    <p class="section-sub">Informed choices start with honest information. Read, watch, and understand.</p>
+  </div>
+  <div class="edu-grid" id="eduGrid"></div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research" class="section section-alt">
+  <div class="section-header reveal">
+    <div class="section-kicker">🔬 Science-Backed</div>
+    <h2 class="section-title">Research & <em>Health</em> Benefits</h2>
+    <p class="section-sub">Peer-reviewed evidence for a plant-based lifestyle — no myths, just facts.</p>
+  </div>
+  <div class="research-grid" id="researchGrid"></div>
+</section>
+
+<!-- RECIPES -->
+<section id="recipes" class="section">
+  <div class="section-header reveal">
+    <div class="section-kicker">🍳 Cook It Yourself</div>
+    <h2 class="section-title">Cheap Vegan <em>Recipes</em></h2>
+    <p class="section-sub">DIY plant-based recipes that save money and taste amazing — made for Indian kitchens.</p>
+  </div>
+  <div class="recipes-grid" id="recipesGrid"></div>
+</section>
+
+<!-- BRANDS -->
+<section class="section section-alt">
+  <div class="section-header reveal">
+    <div class="section-kicker">🇮🇳 Made in India</div>
+    <h2 class="section-title">Top Indian <em>Vegan</em> Brands</h2>
+    <p class="section-sub">Supporting local brands that are making veganism accessible across India.</p>
+  </div>
+  <div class="brands-strip" id="brandsStrip"></div>
+</section>
+
+<!-- SUBSCRIPTION -->
+<section class="section">
+  <div class="sub-box reveal">
+    <div class="sub-left">
+      <div class="sub-kicker">📦 Monthly Box</div>
+      <div class="sub-title">Affordable Vegan Box</div>
+      <div class="sub-items">
+        <div class="sub-item">🥛 Plant Milk</div>
+        <div class="sub-item">🍫 Vegan Chocolate</div>
+        <div class="sub-item">🍪 Vegan Snacks</div>
+        <div class="sub-item">🎁 New Samples</div>
+      </div>
+      <div class="sub-price">₹499 <span>/ month</span></div>
+    </div>
+    <button class="sub-btn" onclick="toast('Subscription added! 🎉')">Subscribe Now →</button>
+  </div>
+</section>
+
+<!-- BEGINNER GUIDE -->
+<section id="guide" class="section section-alt">
+  <div class="section-header reveal">
+    <div class="section-kicker">🌱 Start Here</div>
+    <h2 class="section-title">Beginner's Guide to <em>Veganism</em> in India</h2>
+    <p class="section-sub">Going vegan doesn't have to be hard or expensive. Here's how to start.</p>
+  </div>
+  <div class="guide-steps reveal" id="guideSteps"></div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community" class="section">
+  <div class="section-header reveal">
+    <div class="section-kicker">👥 Community</div>
+    <h2 class="section-title">Vegan <em>Community</em> India</h2>
+    <p class="section-sub">Share recipes, tips, and your vegan journey with others across India.</p>
+  </div>
+  <div class="community-posts" id="communityPosts"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">Shantanu's <span>Store</span></div>
+      <p class="footer-tagline">Making veganism affordable, accessible, and achievable for every Indian household.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Shop</div>
+      <ul class="footer-links">
+        <li><a href="#">Plant Milk</a></li>
+        <li><a href="#">Vegan Cheese</a></li>
+        <li><a href="#">Meat Alternatives</a></li>
+        <li><a href="#">Snacks</a></li>
+        <li><a href="#">Vegan Protein</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Learn</div>
+      <ul class="footer-links">
+        <li><a href="#">Dairy Reality</a></li>
+        <li><a href="#">Research Hub</a></li>
+        <li><a href="#">Recipes</a></li>
+        <li><a href="#">Beginner Guide</a></li>
+        <li><a href="#">Community</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Shantanu's Store. Made with 💚 in India.</p>
+    <div class="payment-icons">
+      <span class="pay-badge">UPI</span>
+      <span class="pay-badge">Debit</span>
+      <span class="pay-badge">Credit</span>
+      <span class="pay-badge">NetBank</span>
+      <span class="pay-badge">COD</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="if(event.target===this)closeCart()">
+  <div class="cart-panel">
+    <div class="cart-header">
+      <div class="cart-title">Your Cart 🛒</div>
+      <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+    <div id="cartItems"></div>
+    <div id="cartTotalArea"></div>
+    <button class="checkout-btn" onclick="toast('Proceeding to checkout! 🎉')">Checkout via UPI / Card →</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── DATA ───
+const products = [
+  { id:1, name:'Oat Milk', brand:'Goodmylk', cat:'Plant-based milk', emoji:'🥛', price:175, was:220, desc:'Creamy barista-grade oat milk, perfect for chai & coffee.', bg:'#E8F4F0' },
+  { id:2, name:'Almond Milk', brand:'Raw Pressery', cat:'Plant-based milk', emoji:'🌰', price:140, was:180, desc:'Cold-pressed almond milk with no added sugar.', bg:'#F4EEE8' },
+  { id:3, name:'Cashew Cheese', brand:'Urban Platter', cat:'Vegan cheese', emoji:'🧀', price:340, was:420, desc:'Rich, spreadable cashew-based cheese. Zero dairy.', bg:'#F4F0E8' },
+  { id:4, name:'Soy Milk', brand:'Sofit', cat:'Plant-based milk', emoji:'🫘', price:99, was:120, desc:'Classic soy milk. High protein, affordable, versatile.', bg:'#EAF4EA' },
+  { id:5, name:'Chicken Strips', brand:'Blue Tribe', cat:'Meat alternatives', emoji:'🍗', price:290, was:350, desc:'Plant-based chicken strips — crispy, protein-rich, 100% vegan.', bg:'#F4EAE8' },
+  { id:6, name:'Vegan Chocolate', brand:'Pascati', cat:'Vegan chocolates', emoji:'🍫', price:160, was:200, desc:'Single origin dark chocolate. 70% cacao, dairy-free.', bg:'#3D2410', textLight:true },
+  { id:7, name:'Pea Protein', brand:'Plantaway', cat:'Vegan protein', emoji:'💪', price:899, was:1100, desc:'25g protein per serving from yellow peas. Unflavoured.', bg:'#E8F2EA' },
+  { id:8, name:'Vegan Butter', brand:'Naturali', cat:'Vegan pantry items', emoji:'🧈', price:220, was:270, desc:'Creamy coconut-based butter. Great for spreading & cooking.', bg:'#F4F0D0' },
+  { id:9, name:'Coconut Curd', brand:'Epigamia', cat:'Vegan pantry items', emoji:'🥥', price:130, was:160, desc:'Probiotic-rich coconut curd. Tangy and delicious.', bg:'#EEF4F0' },
+  { id:10, name:'Vegan Lipstick', brand:'The Tribe Concepts', cat:'Vegan cosmetics', emoji:'💄', price:450, was:550, desc:'100% vegan & cruelty-free lipstick. 12 shades available.', bg:'#F4E0E8' },
+  { id:11, name:'Rice Milk', brand:'Grains to Glass', cat:'Plant-based milk', emoji:'🌾', price:115, was:145, desc:'Light and sweet rice milk. Nut-free and allergy-friendly.', bg:'#F4F2E0' },
+  { id:12, name:'Vegan Mutton', brand:'GoodDot', cat:'Meat alternatives', emoji:'🍖', price:320, was:400, desc:'Soy-based mutton alternative. Spice-ready and authentic.', bg:'#F0E8E4' },
+];
+
+const categories = ['All', 'Plant-based milk', 'Vegan cheese', 'Meat alternatives', 'Vegan chocolates', 'Vegan protein', 'Vegan cosmetics', 'Vegan pantry items'];
+
+const alternatives = [
+  { dairy:'Milk', icon:'🥛', alts:['Soy Milk','Almond Milk','Oat Milk','Coconut Milk','Rice Milk'], dairyCost:'₹68/L', veganCost:'₹25/L (DIY Soy)', save:'Save 63%' },
+  { dairy:'Paneer', icon:'🧀', alts:['Tofu','Peanut Paneer','Cashew Paneer'], dairyCost:'₹100/250g', veganCost:'₹60/250g (Tofu)', save:'Save 40%' },
+  { dairy:'Butter', icon:'🧈', alts:['Vegan Butter','Coconut Oil','Peanut Butter'], dairyCost:'₹55/100g', veganCost:'₹30/100g (Coconut Oil)', save:'Save 45%' },
+  { dairy:'Curd / Dahi', icon:'🥣', alts:['Peanut Curd','Soy Curd','Coconut Curd'], dairyCost:'₹40/200g', veganCost:'₹20/200g (DIY)', save:'Save 50%' },
+  { dairy:'Cream', icon:'🍦', alts:['Cashew Cream','Coconut Cream','Soy Cream'], dairyCost:'₹80/100ml', veganCost:'₹45/100ml', save:'Save 44%' },
+  { dairy:'Ghee', icon:'✨', alts:['Coconut Oil','Vegan Ghee','Sesame Oil'], dairyCost:'₹700/L', veganCost:'₹200/L (Coconut)', save:'Save 71%' },
+];
+
+const altFinder = {
+  'milk': ['Soy Milk 🫘','Oat Milk 🌾','Almond Milk 🌰','Coconut Milk 🥥','Rice Milk'],
+  'paneer': ['Tofu (best swap!) 🟡','Peanut Paneer Recipe','Cashew Paneer','Pressed Tofu'],
+  'butter': ['Vegan Butter 🧈','Coconut Oil','Nut Butters','Avocado'],
+  'curd': ['Soy Curd','Peanut Curd','Coconut Curd 🥥','Cashew Yoghurt'],
+  'cream': ['Cashew Cream 🥛','Coconut Cream','Oat Cream'],
+  'ghee': ['Coconut Oil ✨','Vegan Ghee','Sesame Oil','Olive Oil'],
+  'cheese': ['Cashew Cheese 🧀','Nutritional Yeast','Urban Platter Vegan Cheese'],
+  'ice cream': ['Coconut Ice Cream 🥥','Nice Cream (frozen banana)','Soy Ice Cream'],
+  'khoa': ['Cashew Khoa','Coconut Khoa'],
+  'lassi': ['Peanut Lassi','Soy Lassi','Coconut Milk Lassi'],
+  'default': ['Check our Alternatives section 🌿','Try homemade nut milk','Coconut-based option']
+};
+
+const educationCards = [
+  { icon:'🐄', cat:'Animal Welfare', title:'The Truth About Calf Separation', body:'In commercial dairy farms, calves are separated from their mothers within hours of birth — a practice that causes immense stress. Mother cows have been documented crying for days after separation.' },
+  { icon:'💉', cat:'Industry Practices', title:'Hormone Use in Indian Dairy', body:'Oxytocin injections are widely used in Indian dairy farms to force milk letdown. This is illegal under the PCA Act but enforcement remains poor.' },
+  { icon:'🌡️', cat:'Environment', title:'Dairy\'s Climate Footprint', body:'Dairy contributes ~4% of global greenhouse gas emissions. A glass of cow\'s milk produces 3x more CO₂ than any plant-based milk alternative.' },
+  { icon:'💧', cat:'Water Crisis', title:'Water Use in Milk Production', body:'Producing 1 litre of cow\'s milk requires ~1000 litres of water. Oat milk uses just 48 litres. India\'s water scarcity makes this a critical issue.' },
+  { icon:'🌍', cat:'Land Use', title:'Land Degradation from Livestock', body:'Animal agriculture uses 77% of global farmland but provides only 18% of global calories. Switching to plant-based diets could free 3.1 billion hectares.' },
+  { icon:'📽️', cat:'Documentary', title:'Watch: Dominion (2018)', body:'A landmark documentary using drone footage to expose modern animal agriculture in Australia. Eye-opening, free on YouTube. Recommended for all ages.' },
+];
+
+const researchCards = [
+  { tag:'Protein Science', title:'Plant Protein Is Nutritionally Complete', body:'Research published in the Journal of the International Society of Sports Nutrition shows that soy protein is equivalent to whey for muscle building when consumed in adequate amounts.', source:'ISSN Journal, 2017' },
+  { tag:'Heart Health', title:'Vegan Diets Reduce Cardiovascular Risk by 25%', body:'A meta-analysis of 96 studies found plant-based diets significantly lower LDL cholesterol, blood pressure, and the risk of ischemic heart disease.', source:'PLOS Medicine, 2019' },
+  { tag:'Diabetes', title:'Plant-Based Diets Improve Insulin Sensitivity', body:'Studies from Harvard School of Public Health show people following plant-rich diets had 23% lower risk of developing Type 2 diabetes compared to meat-eaters.', source:'Harvard T.H. Chan, 2020' },
+  { tag:'Nutrition', title:'Vitamin B12 — The Only Nutrient to Supplement', body:'B12 is the one nutrient not reliably found in plant foods. Vegans should supplement 250mcg/day or eat B12-fortified foods. All other nutrients are easily obtained from whole plants.', source:'Vegan Society, Nutritional Review 2021' },
+  { tag:'Environment', title:'Going Vegan Is the Biggest Climate Action', body:'A landmark Oxford University study found that a vegan diet reduces your food carbon footprint by 73%. No other single action comes close.', source:'Oxford University, Poore & Nemecek, 2018' },
+  { tag:'Indian Diet', title:'Traditional Indian Diet Is Mostly Vegan Already', body:'Dal, sabzi, roti, and rice — the staple Indian diet is predominantly plant-based. Removing dairy and adding more legumes makes it fully vegan with minimal change.', source:'Indian Council of Medical Research, 2020' },
+];
+
+const recipes = [
+  { emoji:'🥛', name:'Homemade Soy Milk', time:'15 min', serves:'4 cups', cost:'₹20', steps:'Soak 1 cup soybeans overnight. Blend with 4 cups water. Strain through muslin cloth. Boil for 15 min. Add salt/jaggery to taste. Store in fridge for 3 days.' },
+  { emoji:'🫙', name:'Peanut Curd (Dahi)', time:'8 hrs', serves:'2 cups', cost:'₹15', steps:'Blend 1 cup soaked peanuts with 1.5 cups water. Strain. Boil, cool to lukewarm. Add 2 tsp store-bought vegan curd as starter. Keep warm for 8 hours to set.' },
+  { emoji:'🧀', name:'Tofu Paneer', time:'30 min', serves:'250g', cost:'₹60', steps:'Press extra-firm tofu for 30 min. Cut into cubes. Marinate in salt, turmeric, cumin. Pan-fry until golden. Use exactly like paneer in any recipe!' },
+  { emoji:'☕', name:'Vegan Masala Chai', time:'10 min', serves:'2 cups', cost:'₹8', steps:'Boil water with ginger, cardamom, cloves. Add tea leaves. Simmer 3 min. Add oat milk or soy milk. Sweeten with jaggery. Froth and serve hot.' },
+  { emoji:'🌾', name:'Oat Milk at Home', time:'5 min', serves:'1 litre', cost:'₹12', steps:'Blend 1 cup rolled oats with 4 cups cold water for 30 seconds. Strain immediately through cheesecloth. Do NOT over-blend. Chill and use within 4 days.' },
+  { emoji:'🥥', name:'Cashew Cream', time:'10 min', serves:'1 cup', cost:'₹40', steps:'Soak ½ cup cashews in water for 2 hours. Blend with ½ cup fresh water until silky smooth. Season with salt. Use in curries, pasta, and desserts.' },
+];
+
+const brands = [
+  { logo:'🌱', name:'Plantaway', type:'Vegan Proteins & Alternatives' },
+  { logo:'🥛', name:'Goodmylk', type:'Plant-Based Milks' },
+  { logo:'🏪', name:'Urban Platter', type:'Vegan Pantry & Specialty' },
+  { logo:'💙', name:'Blue Tribe', type:'Meat Alternatives' },
+  { logo:'🍫', name:'Pascati', type:'Vegan Chocolates' },
+  { logo:'⚡', name:'Epigamia', type:'Plant-Based Dairy' },
+  { logo:'🌿', name:'GoodDot', type:'Plant Protein Meats' },
+  { logo:'💚', name:'The Tribe Concepts', type:'Vegan Cosmetics' },
+];
+
+const guideSteps = [
+  { title:'Start with What You Already Eat', body:'Most Indian food is already vegan — dal, roti, rice, sabzi, idli, dosa, poha, upma. You\'re closer than you think! Start by enjoying these without any dairy modifications.' },
+  { title:'Swap Dairy Gradually', body:'Replace cow\'s milk with soy or oat milk first — they work identically in chai. Then swap curd with peanut curd, butter with coconut oil. One swap per week is sustainable.' },
+  { title:'Master Your Proteins', body:'Eat dal every day (cheapest protein in India at ₹3/serving). Add tofu, chana, rajma, moong, and soy milk. You\'ll easily hit 50g protein daily — no supplements needed.' },
+  { title:'Budget Vegan Grocery List', body:'Build your base pantry: dal varieties (₹80/kg), soy milk (₹99), tofu (₹100/250g), rolled oats (₹80), peanuts (₹120/kg), seasonal veggies, and jaggery. Total: under ₹1500/month.' },
+  { title:'Know Your Vitamins', body:'Supplement Vitamin B12 (₹150/month). Get Vitamin D from daily sunlight. Eat iron-rich foods (spinach, beans) with lemon juice for better absorption. That\'s it — you\'re nutritionally complete.' },
+];
+
+const communityPosts = [
+  { avatar:'🧑‍🍳', author:'Priya from Pune', date:'2 days ago', body:'Made homemade oat milk for the first time today! Cost me ₹12 for a full litre. Used it in my morning chai and honestly couldn\'t tell the difference. 10/10 recommend the recipe here!', tags:['Oat Milk', 'DIY', 'Budget'] },
+  { avatar:'👨‍💻', author:'Rohit from Bangalore', date:'4 days ago', body:'Switched to Blue Tribe chicken strips for my weekly pulao. My non-vegan parents couldn\'t tell it wasn\'t real chicken! Mind blown. This is the future.', tags:['Product Review', 'Blue Tribe', 'Family'] },
+  { avatar:'👩‍🎓', author:'Ananya from Delhi', date:'1 week ago', body:'Started my vegan journey 3 months ago. Biggest tip: don\'t stress about being perfect. Start with one vegan meal a day. Shantanu\'s Store helped me find affordable options that actually work for Indian cooking.', tags:['Beginner', 'Journey', 'Tips'] },
+  { avatar:'🧑‍🌾', author:'Vikram from Chennai', date:'1 week ago', body:'Environmental impact calculator on this website showed me I\'ve saved 2400 litres of water in 2 months. That\'s real, tangible change. Veganism is literally the most powerful climate action you can take.', tags:['Environment', 'Impact', 'Motivation'] },
+  { avatar:'👩‍🍳', author:'Sunita from Hyderabad', date:'2 weeks ago', body:'Peanut curd recipe is a GAME CHANGER. Tastes exactly like regular dahi, costs ₹15 per batch, and I know exactly what\'s in it. Sharing the recipe with my whole colony now!', tags:['Recipe', 'Peanut Curd', 'DIY'] },
+  { avatar:'👨‍👩‍👧', author:'The Mehta Family', date:'2 weeks ago', body:'We\'re a family of 4 and went vegan on ₹8000/month total food budget. Affordable Vegan Box subscription helps us discover new products every month. Highly recommend for families!', tags:['Family', 'Budget', 'Subscription'] },
+];
+
+// ─── CART STATE ───
+let cart = [];
+
+function addToCart(product) {
+  const existing = cart.find(i => i.id === product.id);
+  if (existing) existing.qty++;
+  else cart.push({ ...product, qty: 1 });
+  updateCartUI();
+  toast(`${product.emoji} ${product.name} added to cart!`);
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  updateCartUI();
+  renderCart();
+}
+
+function updateCartUI() {
+  const total = cart.reduce((s, i) => s + i.qty, 0);
+  document.getElementById('cartCount').textContent = total;
+  renderCart();
+}
+
+function renderCart() {
+  const el = document.getElementById('cartItems');
+  const totalEl = document.getElementById('cartTotalArea');
+  if (!cart.length) {
+    el.innerHTML = `<div class="empty-cart"><div class="empty-cart-icon">🌿</div><p>Your cart is empty.<br>Start shopping for vegan goodness!</p></div>`;
+    totalEl.innerHTML = '';
+    return;
+  }
+  el.innerHTML = cart.map(i => `
+    <div class="cart-item">
+      <div class="cart-item-emoji">${i.emoji}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${i.name} × ${i.qty}</div>
+        <div class="cart-item-price">₹${i.price * i.qty}</div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart(${i.id})">✕</button>
+    </div>
+  `).join('');
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  totalEl.innerHTML = `<div class="cart-total">Total: ₹${total}</div>`;
+}
+
+function openCart() { document.getElementById('cartOverlay').classList.add('open'); renderCart(); }
+function closeCart() { document.getElementById('cartOverlay').classList.remove('open'); }
+
+// ─── TOAST ───
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2800);
+}
+
+// ─── RENDER PRODUCTS ───
+let activeCategory = 'All';
+function renderProducts(cat) {
+  activeCategory = cat;
+  document.querySelectorAll('.pill').forEach(p => p.classList.toggle('active', p.dataset.cat === cat));
+  const filtered = cat === 'All' ? products : products.filter(p => p.cat === cat);
+  document.getElementById('productsGrid').innerHTML = filtered.map(p => `
+    <div class="product-card reveal">
+      <div class="product-img" style="background:${p.bg || '#F0F5F2'}">
+        <span>${p.emoji}</span>
+        <span class="badge-vegan">✓ Vegan</span>
+        ${p.was ? `<span class="badge-sale">SALE</span>` : ''}
+      </div>
+      <div class="product-info">
+        <div class="product-brand">${p.brand}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-footer">
+          <div class="product-price">
+            ${p.was ? `<span class="was">₹${p.was}</span>` : ''}
+            <span class="now">₹${p.price}</span>
+          </div>
+          <button class="add-btn" onclick='addToCart(${JSON.stringify(p)})'>Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  observeReveal();
+}
+
+function renderCategories() {
+  document.getElementById('categoryPills').innerHTML = categories.map(c => `
+    <button class="pill ${c === 'All' ? 'active' : ''}" data-cat="${c}" onclick="renderProducts('${c}')">${c}</button>
+  `).join('');
+}
+
+// ─── RENDER ALTERNATIVES ───
+function renderAlternatives() {
+  document.getElementById('altGrid').innerHTML = alternatives.map(a => `
+    <div class="alt-card reveal">
+      <div class="dairy-name">Dairy: ${a.dairy}</div>
+      <div class="alt-title">${a.icon} Vegan Alternatives</div>
+      <div class="alt-tags">${a.alts.map(t => `<span class="alt-tag">${t}</span>`).join('')}</div>
+      <div class="cost-compare">
+        🐄 Dairy: ${a.dairyCost} &nbsp;→&nbsp; 🌱 Vegan: ${a.veganCost}
+        <div class="save">${a.save}</div>
+      </div>
+    </div>
+  `).join('');
+  observeReveal();
+}
+
+// ─── ALTERNATIVE FINDER ───
+function findAlternative() {
+  const query = document.getElementById('finderInput').value.toLowerCase().trim();
+  const res = document.getElementById('finderResults');
+  let results = altFinder['default'];
+  for (const key in altFinder) {
+    if (query.includes(key) || key.includes(query)) {
+      results = altFinder[key]; break;
+    }
+  }
+  res.style.display = 'flex';
+  res.innerHTML = results.map((r, i) => `<span class="finder-result-tag" style="animation-delay:${i*0.07}s">${r}</span>`).join('');
+}
+
+// ─── IMPACT CALCULATOR ───
+function calcImpact() {
+  const days = parseInt(document.getElementById('daysSlider').value);
+  const meals = parseInt(document.getElementById('mealsSlider').value);
+  document.getElementById('daysVal').textContent = `${days} days`;
+  document.getElementById('mealsVal').textContent = `${meals} meals`;
+  document.getElementById('waterSaved').textContent = `${(days * meals * 500).toLocaleString('en-IN')}L`;
+  document.getElementById('co2Saved').textContent = `${(days * meals * 0.4).toFixed(1)}kg`;
+  document.getElementById('animalsSaved').textContent = Math.round(days * meals * 0.05);
+  document.getElementById('landSaved').textContent = `${(days * meals * 0.1).toFixed(1)}m²`;
+}
+
+// ─── RENDER EDUCATION ───
+function renderEducation() {
+  document.getElementById('eduGrid').innerHTML = educationCards.map(c => `
+    <div class="edu-card reveal">
+      <div class="edu-icon">${c.icon}</div>
+      <div class="edu-cat">${c.cat}</div>
+      <div class="edu-title">${c.title}</div>
+      <div class="edu-body">${c.body}</div>
+      <a href="#" class="edu-link" onclick="toast('Article coming soon! 📚'); return false;">Read Full Article →</a>
+    </div>
+  `).join('');
+  observeReveal();
+}
+
+// ─── RENDER RESEARCH ───
+function renderResearch() {
+  document.getElementById('researchGrid').innerHTML = researchCards.map(r => `
+    <div class="research-card reveal">
+      <div class="research-tag">${r.tag}</div>
+      <div class="research-title">${r.title}</div>
+      <div class="research-body">${r.body}</div>
+      <div class="research-source">Source: ${r.source}</div>
+    </div>
+  `).join('');
+  observeReveal();
+}
+
+// ─── RENDER RECIPES ───
+function renderRecipes() {
+  document.getElementById('recipesGrid').innerHTML = recipes.map((r, idx) => `
+    <div class="recipe-card reveal">
+      <div class="recipe-emoji">${r.emoji}</div>
+      <div class="recipe-name">${r.name}</div>
+      <div class="recipe-meta">
+        <span>${r.time}</span>
+        <span>Serves: ${r.serves}</span>
+      </div>
+      <div class="recipe-cost">Cost: ${r.cost}</div>
+      <div class="recipe-steps" id="steps-${idx}" style="display:none;">${r.steps}</div>
+      <button class="recipe-toggle" onclick="toggleRecipe(${idx}, this)">Show Steps ▾</button>
+    </div>
+  `).join('');
+  observeReveal();
+}
+
+function toggleRecipe(idx, btn) {
+  const el = document.getElementById(`steps-${idx}`);
+  const open = el.style.display === 'block';
+  el.style.display = open ? 'none' : 'block';
+  btn.textContent = open ? 'Show Steps ▾' : 'Hide Steps ▴';
+}
+
+// ─── RENDER BRANDS ───
+function renderBrands() {
+  document.getElementById('brandsStrip').innerHTML = brands.map(b => `
+    <div class="brand-card reveal">
+      <div class="brand-logo">${b.logo}</div>
+      <div class="brand-name">${b.name}</div>
+      <div class="brand-type">${b.type}</div>
+    </div>
+  `).join('');
+  observeReveal();
+}
+
+// ─── RENDER GUIDE ───
+function renderGuide() {
+  document.getElementById('guideSteps').innerHTML = guideSteps.map((s, i) => `
+    <div class="guide-step reveal">
+      <div class="step-num">0${i+1}</div>
+      <div>
+        <div class="step-title">${s.title}</div>
+        <div class="step-body">${s.body}</div>
+      </div>
+    </div>
+  `).join('');
+  observeReveal();
+}
+
+// ─── RENDER COMMUNITY ───
+function renderCommunity() {
+  document.getElementById('communityPosts').innerHTML = communityPosts.map(p => `
+    <div class="community-post reveal">
+      <div class="post-header">
+        <div class="post-avatar">${p.avatar}</div>
+        <div class="post-meta">
+          <div class="post-author">${p.author}</div>
+          <div class="post-date">${p.date}</div>
+        </div>
+      </div>
+      <div class="post-body">${p.body}</div>
+      <div class="post-tags">${p.tags.map(t => `<span class="post-tag">#${t}</span>`).join('')}</div>
+    </div>
+  `).join('');
+  observeReveal();
+}
+
+// ─── SCROLL REVEAL ───
+function observeReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => obs.observe(el));
+}
+
+// ─── INIT ───
+renderCategories();
+renderProducts('All');
+renderAlternatives();
+renderEducation();
+renderResearch();
+renderRecipes();
+renderBrands();
+renderGuide();
+renderCommunity();
+calcImpact();
+setTimeout(observeReveal, 100);
+</script>
+</body>
+</html>
